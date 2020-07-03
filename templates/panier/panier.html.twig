@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h3 class="text-center">Tous les produits de votre panier</h3>
+        <div class="float-right">
+            <a href="{{ path("vider_panier") }}" class="btn btn-success">Vider tout le panier</a>
+        </div>
+        <br>
+        {% if produits | length > 0 %}
+            <table class="table table-stripped mt-5">
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Supprimer</th>
+                </tr>
+                {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.produit.id }}</td>
+                        <td>{{ produit.produit.name }}</td>
+                        <td>
+                            <a href="{{ path("supprimer_produit_session", {id:produit.produit.id}) }}" class="btn btn-danger">X</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="text-center mt-5">
+            <i>Votre panier est vide pour le moment !</i>
+                <img src="{{ asset("images/panier_vide.jpg") }}" width="30%" height="30%">
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

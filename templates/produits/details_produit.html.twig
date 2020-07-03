@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les produits{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+            <h3 class="text-center">Détails du produit : {{ produit.name }}</h3>
+            <hr>
+            <div class="row">
+                    <div class="col-md-8">
+                            <img src="{{ produit.picture }}" class="card-img-top img-responsive" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path("details_produit" , {id:produit.id}) }}" class="link">{{ produit.name }}</a>
+                                </h5>
+                                <b>ID : </b> {{ produit.id }}
+                                <hr>
+                                <h5>Description</h5>
+                                <p class="card-text">{{ produit.description }}</p>
+                                <h5>Promotion</h5>
+                                {% if produit.promo %}
+                                    <div class="alert alert-info text-center">
+                                        Ce produit est est en promotion
+                                    </div>
+                                {% else %}
+                                    <i>Ce produit n'est pas en promotion en ce moment !</i>
+                                {% endif %}
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                          <a href="{{ path("ajouter_produit_session" , {id:produit.id}) }}" class="btn btn-success">Ajouter au Panier</a>
+                        </div>
+                    </div>
+    </div>
+    </div>
+{% endblock %}

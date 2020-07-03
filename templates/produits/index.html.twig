@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les produits{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        {% if produits | length > 0 %}
+            <h3 class="text-center">Tout nos produits disponibles</h3>
+            <hr>
+            <div class="row">
+                {% for produit in produits %}
+                    <div class="col-md-4 mb-2">
+                        <div class="card" style="width: 18rem;">
+                            <a href="{{ path("details_produit" , {id:produit.id}) }}" >
+                                <img src="{{ produit.picture }}" class="card-img-top img-responsive" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path("details_produit" , {id:produit.id}) }}" class="link">{{ produit.name }}</a>
+                                    {% if produit.promo %}
+                                        <span class="badge badge-success float-right">Promotion</span>
+                                    {% endif %}
+                                </h5>
+                                <p class="card-text">{{ produit.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                Oups ! Pas de produits actuellement.
+            </div>
+            <img src="{{ asset("images/empty_stock.jpg") }}" width="100%">
+        {% endif %}
+    </div>
+
+{% endblock %}
